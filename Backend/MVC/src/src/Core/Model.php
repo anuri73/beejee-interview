@@ -12,4 +12,9 @@ class Model implements IModel
     {
         $this->entityManager = $entityManager;
     }
+
+    public function getEntityManager(): EntityManagerInterface
+    {
+        return $this->entityManager;
+    }
 }

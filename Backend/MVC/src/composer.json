@@ -2,7 +2,9 @@
   "type": "project",
   "license": "proprietary",
   "require": {
-    "php": "^7.4"
+    "php": "^7.4",
+    "klein/klein": "^2.1",
+    "tightenco/collect": "^7.9"
   },
   "require-dev": {
   },

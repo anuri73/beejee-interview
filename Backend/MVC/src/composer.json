@@ -3,7 +3,10 @@
   "license": "proprietary",
   "require": {
     "php": "^7.4",
+    "doctrine/migrations": "^2.0",
+    "doctrine/orm": "^2.6.2",
     "klein/klein": "^2.1",
+    "symfony/yaml": "2.*",
     "tightenco/collect": "^7.9",
     "twig/twig": "^3.0"
   },

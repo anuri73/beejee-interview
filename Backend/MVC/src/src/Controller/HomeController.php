@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
-class HomeController
+use App\Core\Controller;
+use App\Core\IController;
+
+class HomeController extends Controller implements IController
 {
     function index()
     {
-        echo "Hi;";
+        return $this->getView()->render('home/index.html.twig');
     }
 }

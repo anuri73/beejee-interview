@@ -15,7 +15,7 @@ $config->route = new RouteConfig(new Collection([
     new RouteConfigItem(
         'GET',
         '/',
-        [HomeController::class, 'index']
+        [new HomeController(), 'index']
     )
 ]));
 $kernel->init($config);

@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+	CREATE USER "$MVC_USER" with encrypted password '$MVC_PASSWORD';
+	CREATE DATABASE "$MVC_DB";
+	GRANT ALL PRIVILEGES ON DATABASE "$MVC_DB" TO "$MVC_USER";
+EOSQL

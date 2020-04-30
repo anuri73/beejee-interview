@@ -1,0 +1,58 @@
+version: '3.2'
+
+networks:
+  web-network:
+
+volumes:
+  postgres.data:
+    external: true
+
+services:
+
+  mvc:
+    build:
+      context: Backend/MVC
+      dockerfile: Devops/Dockerfile
+    container_name: MVC
+    volumes:
+      - ./Backend/MVC/src:/var/www/mvc.app
+    environment:
+      - DATABASE_URL=$${POSTGRES_MVC_CONNECTION_STRING}
+    ports:
+      - '81:9000'
+    networks:
+      - web-network
+
+  nginx:
+    build:
+      context: Services/Nginx
+      dockerfile: Devops/Dockerfile
+    container_name: Nginx
+    ports:
+      - '82:80'
+    volumes:
+      - ./Services/Nginx/conf.d:/etc/nginx/conf.d/
+      - ./Backend/MVC//src:/var/www/mvc.app
+    networks:
+      - web-network
+
+  postgres:
+    build:
+      context: Services/PostgreSql
+      dockerfile: Devops/Dockerfile
+    tty: true
+    volumes:
+      - postgres.data:/var/lib/postgresql/data
+      - ./Services/PostgreSql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_USER=$${POSTGRES_ROOT_USER}
+      - POSTGRES_PASSWORD=$${POSTGRES_ROOT_PASSWORD}
+
+      - MVC_DB=$${POSTGRES_MVC_DB}
+      - MVC_USER=$${POSTGRES_MVC_USER}
+      - MVC_PASSWORD=$${POSTGRES_MVC_PASSWORD}
+    ports:
+      - '5432:5432'
+    container_name: 'Postgres'
+    networks:
+      - web-network

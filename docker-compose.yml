@@ -13,7 +13,6 @@ services:
     build:
       context: Backend/MVC
       dockerfile: Devops/Dockerfile
-    container_name: MVC
     volumes:
       - ./Backend/MVC/src:/var/www/mvc.app
     environment:
@@ -27,7 +26,6 @@ services:
     build:
       context: Services/Nginx
       dockerfile: Devops/Dockerfile
-    container_name: Nginx
     ports:
       - '82:80'
     volumes:
@@ -53,6 +51,5 @@ services:
       - MVC_PASSWORD=$${POSTGRES_MVC_PASSWORD}
     ports:
       - '5432:5432'
-    container_name: 'Postgres'
     networks:
       - web-network

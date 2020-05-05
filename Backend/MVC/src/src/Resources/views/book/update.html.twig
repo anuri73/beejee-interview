@@ -1,18 +1,18 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <form method="post" action="add" name="task">
+    <form method="post" action="/task/edit/{{ task.id }}" name="task">
         <div class="form-group">
             <label for="task_username">Username</label>
-            <input type="text" id="task_username" name="task[username]"/>
+            <input type="text" id="task_username" name="task[username]" value="{{ task.username }}"/>
         </div>
         <div class="form-group">
             <label for="task_email">Email</label>
-            <input type="text" id="task_email" name="task[email]"/>
+            <input type="text" id="task_email" name="task[email]" value="{{ task.email }}"/>
         </div>
         <div class="form-group">
             <label for="task_task">Task</label>
-            <textarea id="task_task" name="task[task]"></textarea>
+            <textarea id="task_task" name="task[task]"> {{ task.task }} </textarea>
         </div>
         <input type="submit" value="Submit"/>
     </form>

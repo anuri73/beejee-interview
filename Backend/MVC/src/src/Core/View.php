@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use Symfony\Bridge\Twig\Extension\FormExtension;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;

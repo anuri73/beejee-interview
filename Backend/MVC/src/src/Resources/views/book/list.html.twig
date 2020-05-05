@@ -1,8 +1,16 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <a href="/book/create">Create new book</a>
-    {% for book in books %}
-        {{ book.name }}
+    <a href="/task/create">Create new book</a>
+    {% for task in tasks %}
+        <p>
+            {{ task.email }}
+        </p>
+        <p>
+            {{ task.username }}
+        </p>
+        <p>
+            {{ task.task }}
+        </p>
     {% endfor %}
 {% endblock %}

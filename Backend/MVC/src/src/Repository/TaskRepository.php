@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class BookRepository extends EntityRepository
+class TaskRepository extends EntityRepository
 {
 
 }

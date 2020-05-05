@@ -9,9 +9,26 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Setup;
 use Klein\Klein;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class Kernel
 {
+    /**
+     * @var ContainerBuilder|ContainerInterface $container
+     */
+    public ContainerInterface $container;
+
+    public function __construct()
+    {
+        $this->container = new ContainerBuilder();
+        $loader = new XmlFileLoader($this->container, new FileLocator(__DIR__));
+
+        $loader->load('Config/container.xml');
+    }
+
     function initRoutes(IRouteConfig $config)
     {
         $klein = new Klein();

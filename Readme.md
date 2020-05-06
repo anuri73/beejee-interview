@@ -1,2 +1,0 @@
-# beejee-interview
-Minimal MVC 

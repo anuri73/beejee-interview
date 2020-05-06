@@ -3,6 +3,15 @@
 {% block body %}
     <a href="/task/create">Create new book</a>
 
+    <nav aria-label="Sort by" style="margin-top: 1em;">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="{{ path("/tasks", {sortBy: 'id'}) }}">Id</a></li>
+            <li class="page-item"><a class="page-link" href="{{ path("/tasks", {sortBy: 'username'}) }}">Username</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="{{ path("/tasks", {sortBy: 'email'}) }}">Email</a></li>
+        </ul>
+    </nav>
+
     <div class="card-group" style="padding: 1em 0;">
         {% for task in tasks %}
             <div class="card">

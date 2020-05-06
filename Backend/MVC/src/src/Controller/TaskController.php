@@ -30,16 +30,23 @@ class TaskController extends Controller
     function list(Request $request, Response $response)
     {
         $page = $request->param('page', 1);
+        $pageLimit = 3;
+        $sortBy = $request->param('sortBy', 'id');
+        if (!in_array($sortBy, ['id', 'username', 'email'])) {
+            $sortBy = "id";
+        }
         /** @var EntityManager $em */
         $em = $this->getModel()->getEntityManager();
         $tasks = $em->getRepository(Task::class)->findNextTasks(
-            $page
+            $page,
+            $pageLimit,
+            $sortBy
         );
         $total = $em->getRepository(Task::class)->count([]);
         return $this->getView()->render('book/list.html.twig', [
             'tasks' => $tasks,
             'total' => $total,
-            'totalPages' => ceil($total / 3),
+            'totalPages' => ceil($total / $pageLimit),
             'page' => $page
         ]);
     }

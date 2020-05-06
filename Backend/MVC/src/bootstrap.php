@@ -64,4 +64,9 @@ $config->route = new RouteConfig(new Collection([
         '/auth/login',
         [$authController, 'login']
     ),
+    new RouteConfigItem(
+        'GET',
+        '/logout',
+        [$authController, 'logout']
+    ),
 ]));

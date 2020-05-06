@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Core\Twig\AuthExtension;
 use App\Core\Twig\DumpExtension;
 use App\Core\Twig\RoutingExtension;
 use Symfony\Bridge\Twig\Extension\FormExtension;
@@ -23,6 +24,7 @@ class View implements IView
         $this->twig = new Environment($loader);
         $this->twig->addExtension(new RoutingExtension());
         $this->twig->addExtension(new DumpExtension());
+        $this->twig->addExtension(new AuthExtension());
     }
 
     /**

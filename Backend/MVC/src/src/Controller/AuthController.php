@@ -39,4 +39,10 @@ class AuthController extends Controller implements IController
             $response->redirect('/auth');
         }
     }
+
+    function logout(Request $request, Response $response)
+    {
+        $_SESSION["authorized"] = false;
+        return $response->redirect('/');
+    }
 }

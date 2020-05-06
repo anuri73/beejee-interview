@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <form method="post" action="/auth/login" name="auth">
+        <div class="form-group">
+            <label for="task_username">Username</label>
+            <input type="text" id="task_username" name="auth[username]"/>
+        </div>
+        <div class="form-group">
+            <label for="task_password">Password</label>
+            <input type="password" id="task_password" name="auth[password]"/>
+        </div>
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

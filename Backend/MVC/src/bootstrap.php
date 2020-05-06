@@ -11,6 +11,7 @@ $kernel = new Kernel();
 $config = new Config();
 
 $taskController = $kernel->container->get('app.task_controller');
+$authController = $kernel->container->get('app.auth_controller');
 
 $config->route = new RouteConfig(new Collection([
     new RouteConfigItem(
@@ -52,5 +53,15 @@ $config->route = new RouteConfig(new Collection([
         'DELETE',
         '/task/delete/:id',
         [$taskController, 'delete']
+    ),
+    new RouteConfigItem(
+        'GET',
+        '/auth',
+        [$authController, 'loginPage']
+    ),
+    new RouteConfigItem(
+        'POST',
+        '/auth/login',
+        [$authController, 'login']
     ),
 ]));

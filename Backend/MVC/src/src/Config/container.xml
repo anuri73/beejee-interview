@@ -18,5 +18,12 @@
             <argument type="service" id="core.view"/>
             <argument type="service" id="core.model"/>
         </service>
+        <service id="app.auth_controller" class="App\Controller\AuthController">
+            <argument type="service" id="core.view"/>
+            <argument type="service" id="core.model"/>
+            <argument type="service" id="auth_manager"/>
+        </service>
+        <service id="auth_manager" class="App\Service\AuthManager">
+        </service>
     </services>
 </container>

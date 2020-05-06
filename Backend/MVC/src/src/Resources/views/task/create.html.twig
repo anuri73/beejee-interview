@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {% if errors %}
+        <div class="alert alert-danger">
+            <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {% for errorlist in errors %}
+                {% for field, error in errorlist %}
+                    <li>{{ field }} - {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <form method="post" action="/task/create" name="task" class="form-horizontal" role="form">
+
+        <div class="form-group">
+            <label for="task_username" class="control-label col-sm-2">Username</label>
+            <input type="text" id="task_username" name="task[username]" class="is-invalid"/>
+        </div>
+        <div class="form-group">
+            <label for="task_email" class="control-label col-sm-2">Email</label>
+            <input type="text" id="task_email" name="task[email]"/>
+        </div>
+        <div class="form-group">
+            <label for="task_task" class="control-label col-sm-2">Task</label>
+            <textarea id="task_task" name="task[task]"></textarea>
+        </div>
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

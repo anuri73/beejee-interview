@@ -26,18 +26,13 @@ $config->route = new RouteConfig(new Collection([
     ),
     new RouteConfigItem(
         'GET',
-        '/task/:id',
-        [$taskController, 'view']
-    ),
-    new RouteConfigItem(
-        'GET',
         '/task/create',
         [$taskController, 'create']
     ),
     new RouteConfigItem(
         'POST',
-        '/task/add',
-        [$taskController, 'add']
+        '/task/create',
+        [$taskController, 'create']
     ),
     new RouteConfigItem(
         'GET',
@@ -46,13 +41,8 @@ $config->route = new RouteConfig(new Collection([
     ),
     new RouteConfigItem(
         'POST',
-        '/task/edit/[i:id]',
-        [$taskController, 'edit']
-    ),
-    new RouteConfigItem(
-        'DELETE',
-        '/task/delete/:id',
-        [$taskController, 'delete']
+        '/task/update/[i:id]',
+        [$taskController, 'update']
     ),
     new RouteConfigItem(
         'GET',

@@ -9,6 +9,8 @@ use App\Entity\Task;
 use Doctrine\ORM\EntityManager;
 use Klein\Request;
 use Klein\Response;
+use Rakit\Validation\ErrorBag;
+use Rakit\Validation\Validator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Forms;
 
@@ -43,7 +45,7 @@ class TaskController extends Controller
             $sortBy
         );
         $total = $em->getRepository(Task::class)->count([]);
-        return $this->getView()->render('book/list.html.twig', [
+        return $this->getView()->render('task/list.html.twig', [
             'tasks' => $tasks,
             'total' => $total,
             'totalPages' => ceil($total / $pageLimit),
@@ -52,24 +54,22 @@ class TaskController extends Controller
         ]);
     }
 
-    function create()
+    function create(Request $request, Response $response)
     {
-        return $this->getView()->render('book/create.html.twig');
+        if ($request->method('post')) {
+            if (($errors = $this->getValidationError($request)) && $errors->count()) {
+                return $this->getView()->render('task/create.html.twig', [
+                    'errors' => $errors->toArray()
+                ]);
+            } else {
+                $task = $this->handleRequest($request, new Task());
+                $this->model->getEntityManager()->persist($task);
+                $this->model->getEntityManager()->flush();
+                return $response->redirect('/tasks');
+            }
+        }
+        return $this->getView()->render('task/create.html.twig');
     }
-
-    function add(Request $request, Response $response)
-    {
-        $task = $this->handleRequest($request, new Task());
-        $this->model->getEntityManager()->persist($task);
-        $this->model->getEntityManager()->flush();
-        return $response->redirect('/tasks');
-    }
-
-    function view()
-    {
-        return $this->getView()->render('book/view.html.twig');
-    }
-
 
     function update(Request $request, Response $response)
     {
@@ -77,27 +77,24 @@ class TaskController extends Controller
         if (null === $task) {
             return $response->code(404);
         }
-        return $this->getView()->render('book/update.html.twig', [
+        if ($request->method('post')) {
+            if (($errors = $this->getValidationError($request)) && $errors->count()) {
+                return $this->getView()->render('task/update.html.twig', [
+                    'errors' => $errors->toArray(),
+                    'task' => $task,
+                    'is_admin' => $_SESSION['authorized'] === true
+                ]);
+            } else {
+                $task = $this->handleRequest($request, $task);
+                $this->model->getEntityManager()->persist($task);
+                $this->model->getEntityManager()->flush();
+                return $response->redirect('/tasks');
+            }
+        }
+        return $this->getView()->render('task/update.html.twig', [
             'task' => $task,
             'is_admin' => $_SESSION['authorized'] === true
         ]);
-    }
-
-    function edit(Request $request, Response $response)
-    {
-        $task = $this->model->getEntityManager()->find(Task::class, $request->param('id'));
-        if (null === $task) {
-            return $response->code(404);
-        }
-        $task = $this->handleRequest($request, $task);
-        $this->model->getEntityManager()->persist($task);
-        $this->model->getEntityManager()->flush();
-        return $response->redirect('/tasks');
-    }
-
-    function delete()
-    {
-
     }
 
     /**
@@ -107,11 +104,31 @@ class TaskController extends Controller
      */
     private function handleRequest(Request $request, Task $model): Task
     {
+        /** @var array $requestTask */
         $requestTask = $request->param('task', []);
         $model->username = $requestTask['username'];
         $model->email = $requestTask['email'];
         $model->task = $requestTask['task'];
-        $model->completed = $requestTask['completed'];
+        $model->completed = empty($requestTask['completed']) ? false : $requestTask['completed'];
         return $model;
+    }
+
+    /**
+     * @param Request $request
+     * @return ErrorBag
+     */
+    private function getValidationError(Request $request): ErrorBag
+    {
+        /** @var array $requestTask */
+        $requestTask = $request->param('task', []);
+        $validator = new Validator();
+        $validation = $validator->make($requestTask, [
+            'username' => 'required',
+            'email' => 'required|email',
+            'task' => 'required|min:6',
+        ]);
+        // then validate
+        $validation->validate();
+        return $validation->errors();
     }
 }

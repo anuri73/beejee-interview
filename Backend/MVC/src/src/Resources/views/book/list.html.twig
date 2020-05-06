@@ -23,7 +23,11 @@
                     <h5 class="card-title">{{ task.username }}</h5>
                     <h5 class="card-title">{{ task.email }}</h5>
                     <p class="card-text">{{ task.task }}</p>
+                    <p class="card-text">{% if task.completed %}task completed{% else %}task not completed yet{% endif %}</p>
                 </div>
+                {% if is_admin %}
+                    <a href="/task/update/{{ task.id }}" class="btn btn-primary">Edit</a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

@@ -47,7 +47,8 @@ class TaskController extends Controller
             'tasks' => $tasks,
             'total' => $total,
             'totalPages' => ceil($total / $pageLimit),
-            'page' => $page
+            'page' => $page,
+            'is_admin' => $_SESSION['authorized'] === true
         ]);
     }
 
@@ -77,7 +78,8 @@ class TaskController extends Controller
             return $response->code(404);
         }
         return $this->getView()->render('book/update.html.twig', [
-            'task' => $task
+            'task' => $task,
+            'is_admin' => $_SESSION['authorized'] === true
         ]);
     }
 
@@ -109,6 +111,7 @@ class TaskController extends Controller
         $model->username = $requestTask['username'];
         $model->email = $requestTask['email'];
         $model->task = $requestTask['task'];
+        $model->completed = $requestTask['completed'];
         return $model;
     }
 }

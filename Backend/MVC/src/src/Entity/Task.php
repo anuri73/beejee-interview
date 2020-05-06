@@ -33,4 +33,9 @@ class Task
      * @var string $task
      */
     public string $task;
+    /**
+     * @ORM\Column(name="completed", type="boolean", nullable=false)
+     * @var bool $completed
+     */
+    public bool $completed = false;
 }

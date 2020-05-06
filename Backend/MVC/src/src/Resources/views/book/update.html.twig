@@ -14,6 +14,12 @@
             <label for="task_task">Task</label>
             <textarea id="task_task" name="task[task]"> {{ task.task }} </textarea>
         </div>
+        {% if is_admin %}
+            <div class="form-check">
+                <input type="checkbox" name="task[completed]" class="form-check-input" id="task_completed">
+                <label class="form-check-label" for="task_completed">Task completed</label>
+            </div>
+        {% endif %}
         <input type="submit" value="Submit"/>
     </form>
 {% endblock %}

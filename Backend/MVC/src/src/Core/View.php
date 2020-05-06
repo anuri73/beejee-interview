@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Core\Twig\DumpExtension;
+use App\Core\Twig\RoutingExtension;
 use Symfony\Bridge\Twig\Extension\FormExtension;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -19,6 +21,8 @@ class View implements IView
     {
         $loader = new FilesystemLoader('/var/www/mvc.app/src/Resources/views');
         $this->twig = new Environment($loader);
+        $this->twig->addExtension(new RoutingExtension());
+        $this->twig->addExtension(new DumpExtension());
     }
 
     /**

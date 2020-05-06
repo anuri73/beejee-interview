@@ -3,7 +3,6 @@
 use App\Config\Config;
 use App\Config\RouteConfig;
 use App\Config\RouteConfigItem;
-use App\Controller\HomeController;
 use App\Kernel;
 use Tightenco\Collect\Support\Collection;
 
@@ -17,10 +16,7 @@ $config->route = new RouteConfig(new Collection([
     new RouteConfigItem(
         'GET',
         '/',
-        [new HomeController(
-            $kernel->container->get('core.view'),
-            $kernel->container->get('core.model')
-        ), 'index']
+        [$taskController, 'list']
     ),
     new RouteConfigItem(
         'GET',

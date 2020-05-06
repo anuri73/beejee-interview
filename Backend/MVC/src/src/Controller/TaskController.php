@@ -27,13 +27,20 @@ class TaskController extends Controller
         parent::__construct($view, $model);
     }
 
-    function list()
+    function list(Request $request, Response $response)
     {
+        $page = $request->param('page', 1);
         /** @var EntityManager $em */
         $em = $this->getModel()->getEntityManager();
-        $tasks = $em->getRepository(Task::class)->findAll();
+        $tasks = $em->getRepository(Task::class)->findNextTasks(
+            $page
+        );
+        $total = $em->getRepository(Task::class)->count([]);
         return $this->getView()->render('book/list.html.twig', [
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'total' => $total,
+            'totalPages' => ceil($total / 3),
+            'page' => $page
         ]);
     }
 

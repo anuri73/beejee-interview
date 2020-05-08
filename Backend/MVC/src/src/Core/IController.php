@@ -4,5 +4,5 @@ namespace App\Core;
 
 interface IController
 {
-    function getView(): IView;
+    public function getView(): IView;
 }

@@ -17,21 +17,20 @@ class RouteConfig implements IRouteConfig
         $this->routes = empty($routes) ? new Collection() : $routes;
     }
 
-    function setRoutes(Collection $routes)
+    public function setRoutes(Collection $routes)
     {
         foreach ($routes as $route) {
             $this->addRoute($route);
         }
     }
 
-    function addRoute(IRouteConfigItem $configItem)
+    public function addRoute(IRouteConfigItem $configItem)
     {
         $this->routes->add($configItem);
     }
 
-    function getRoutes(): Enumerable
+    public function getRoutes(): Enumerable
     {
         return $this->routes;
     }
 }
-

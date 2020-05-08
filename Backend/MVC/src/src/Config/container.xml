@@ -5,6 +5,7 @@
 
     <services>
         <service id="core.db_config" class="App\Config\DBConfig">
+
         </service>
         <service id="doctrine.orm.entity_manager" class="App\Config\DBConfig">
             <factory class="App\Kernel" method="initDB"/>

@@ -19,12 +19,12 @@ abstract class Controller
         $this->model = $model;
     }
 
-    function getView(): IView
+    public function getView(): IView
     {
         return $this->view;
     }
 
-    function getModel(): IModel
+    public function getModel(): IModel
     {
         return $this->model;
     }

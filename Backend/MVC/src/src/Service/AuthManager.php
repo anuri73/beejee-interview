@@ -25,7 +25,7 @@ class AuthManager
      * @param string $password
      * @return bool
      */
-    function login(string $username, string $password): bool
+    public function login(string $username, string $password): bool
     {
         foreach ($this->admins as $admin) {
             if ($username === $admin->getUsername()) {
@@ -35,7 +35,7 @@ class AuthManager
         return false;
     }
 
-    function hash($password): string
+    public function hash($password): string
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }

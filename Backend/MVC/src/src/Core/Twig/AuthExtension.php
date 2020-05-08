@@ -3,7 +3,6 @@
 
 namespace App\Core\Twig;
 
-
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

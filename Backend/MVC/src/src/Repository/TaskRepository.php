@@ -7,7 +7,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class TaskRepository extends EntityRepository
 {
-    function findNextTasks($page = 1, $limit = 3, $sortBy = 'id')
+    public function findNextTasks($page = 1, $limit = 3, $sortBy = 'id')
     {
         $paginator = new Paginator($this->createQueryBuilder('task')
             ->orderBy("task.{$sortBy}", 'DESC')

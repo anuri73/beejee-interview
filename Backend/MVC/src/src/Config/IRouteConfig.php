@@ -9,5 +9,5 @@ interface IRouteConfig
     /**
      * @return Enumerable|IRouteConfigItem[]
      */
-    function getRoutes(): Enumerable;
+    public function getRoutes(): Enumerable;
 }

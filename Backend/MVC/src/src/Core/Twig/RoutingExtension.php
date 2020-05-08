@@ -38,5 +38,4 @@ final class RoutingExtension extends AbstractExtension
             http_build_query($parameters)
         ]);
     }
-
 }

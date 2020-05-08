@@ -23,13 +23,13 @@ class AuthController extends Controller implements IController
         parent::__construct($view, $model);
     }
 
-    function loginPage(Request $request, Response $response)
+    public function loginPage(Request $request, Response $response)
     {
         return $this->getView()->render('auth/login.html.twig', [
         ]);
     }
 
-    function login(Request $request, Response $response)
+    public function login(Request $request, Response $response)
     {
         $data = $request->param('auth');
         if ($this->auth->login(
@@ -43,7 +43,7 @@ class AuthController extends Controller implements IController
         }
     }
 
-    function logout(Request $request, Response $response)
+    public function logout(Request $request, Response $response)
     {
         $_SESSION["authorized"] = false;
         return $response->redirect('/');

@@ -32,7 +32,7 @@ class TaskController extends Controller
         parent::__construct($view, $model);
     }
 
-    function list(Request $request, Response $response)
+    public function list(Request $request, Response $response)
     {
         $page = $request->param('page', 1);
         $pageLimit = 3;
@@ -57,7 +57,7 @@ class TaskController extends Controller
         ]);
     }
 
-    function create(Request $request, Response $response)
+    public function create(Request $request, Response $response)
     {
         if ($request->method('post')) {
             if (($errors = $this->getValidationError($request)) && $errors->count()) {
@@ -74,7 +74,7 @@ class TaskController extends Controller
         return $this->getView()->render('task/create.html.twig');
     }
 
-    function update(Request $request, Response $response)
+    public function update(Request $request, Response $response)
     {
         $task = $this->getModel()->getEntityManager()->find(Task::class, $request->param('id'));
         if (null === $task) {

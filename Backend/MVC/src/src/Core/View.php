@@ -39,7 +39,7 @@ class View implements IView
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    function render(string $template, array $params = [])
+    public function render(string $template, array $params = [])
     {
         return $this->twig->render($template, $params);
     }

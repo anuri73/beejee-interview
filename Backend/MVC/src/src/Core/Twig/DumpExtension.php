@@ -3,7 +3,6 @@
 
 namespace App\Core\Twig;
 
-
 use Symfony\Component\VarDumper\VarDumper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -24,5 +23,4 @@ class DumpExtension extends AbstractExtension
     {
         return VarDumper::dump($var);
     }
-
 }

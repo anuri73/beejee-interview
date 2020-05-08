@@ -7,7 +7,7 @@ use App\Core\IController;
 
 class HomeController extends Controller implements IController
 {
-    function index()
+    public function index()
     {
         return $this->getView()->render('home/index.html.twig');
     }

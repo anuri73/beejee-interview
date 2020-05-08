@@ -29,7 +29,7 @@ class Kernel
         $loader->load('Config/container.xml');
     }
 
-    function initRoutes(IRouteConfig $config)
+    public function initRoutes(IRouteConfig $config)
     {
         $klein = new Klein();
 
@@ -39,7 +39,7 @@ class Kernel
         $klein->dispatch();
     }
 
-    function initDB(IDBConfig $config): EntityManagerInterface
+    public function initDB(IDBConfig $config): EntityManagerInterface
     {
         $metadataConfig = Setup::createAnnotationMetadataConfiguration(
             [__DIR__ . "/Entity"],

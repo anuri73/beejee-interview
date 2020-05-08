@@ -7,13 +7,16 @@ use Tightenco\Collect\Support\Collection;
 
 class AuthManager
 {
-    private Collection $admins;
+    /**
+     * @var Collection|Admin[]
+     */
+    private $admins;
 
     public function __construct()
     {
         $admin = new Admin();
-        $admin->username = 'admin';
-        $admin->password = $this->hash("123");
+        $admin->setUsername('admin');
+        $admin->setPassword($this->hash("123"));
         $this->admins = new Collection([$admin]);
     }
 
@@ -25,8 +28,8 @@ class AuthManager
     function login(string $username, string $password): bool
     {
         foreach ($this->admins as $admin) {
-            if ($username === $admin->username) {
-                return password_verify($password, $admin->password);
+            if ($username === $admin->getUsername()) {
+                return password_verify($password, $admin->getPassword());
             }
         }
         return false;

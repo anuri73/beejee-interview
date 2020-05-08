@@ -16,7 +16,10 @@ use Symfony\Component\Form\Forms;
 
 class TaskController extends Controller
 {
-    private FormFactoryInterface $formFactory;
+    /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
 
     public function __construct(IView $view, IModel $model)
     {
@@ -63,8 +66,8 @@ class TaskController extends Controller
                 ]);
             } else {
                 $task = $this->handleRequest($request, new Task());
-                $this->model->getEntityManager()->persist($task);
-                $this->model->getEntityManager()->flush();
+                $this->getModel()->getEntityManager()->persist($task);
+                $this->getModel()->getEntityManager()->flush();
                 return $response->redirect('/tasks');
             }
         }
@@ -73,7 +76,7 @@ class TaskController extends Controller
 
     function update(Request $request, Response $response)
     {
-        $task = $this->model->getEntityManager()->find(Task::class, $request->param('id'));
+        $task = $this->getModel()->getEntityManager()->find(Task::class, $request->param('id'));
         if (null === $task) {
             return $response->code(404);
         }
@@ -86,8 +89,8 @@ class TaskController extends Controller
                 ]);
             } else {
                 $task = $this->handleRequest($request, $task);
-                $this->model->getEntityManager()->persist($task);
-                $this->model->getEntityManager()->flush();
+                $this->getModel()->getEntityManager()->persist($task);
+                $this->getModel()->getEntityManager()->flush();
                 return $response->redirect('/tasks');
             }
         }
@@ -106,10 +109,10 @@ class TaskController extends Controller
     {
         /** @var array $requestTask */
         $requestTask = $request->param('task', []);
-        $model->username = $requestTask['username'];
-        $model->email = $requestTask['email'];
-        $model->task = $requestTask['task'];
-        $model->completed = empty($requestTask['completed']) ? false : $requestTask['completed'];
+        $model->setUsername($requestTask['username']);
+        $model->setEmail($requestTask['email']);
+        $model->setTask($requestTask['task']);
+        $model->setCompleted(empty($requestTask['completed']) ? false : $requestTask['completed']);
         return $model;
     }
 

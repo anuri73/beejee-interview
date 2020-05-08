@@ -4,8 +4,14 @@ namespace App\Core;
 
 abstract class Controller
 {
-    public IView $view;
-    public IModel $model;
+    /**
+     * @var IView $view
+     */
+    private $view;
+    /**
+     * @var IModel
+     */
+    private $model;
 
     public function __construct(IView $view, IModel $model)
     {

@@ -6,7 +6,10 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class Model implements IModel
 {
-    public EntityManagerInterface $entityManager;
+    /**
+     * @var EntityManagerInterface $entityManager
+     */
+    private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

@@ -6,11 +6,26 @@ use Doctrine\Common\Cache\Cache;
 
 class DBConfig implements IDBConfig
 {
-    public bool $isDevMode = true;
-    public ?string $proxyDir = null;
-    public ?Cache $cache = null;
-    public bool $useSimpleAnnotationReader = false;
-    public string $connectionString = 'pgsql://mvc:eNjS98AGUIocPV92dsIp8Zok3xfqyDjj@postgres:5432/mvc';
+    /**
+     * @var bool
+     */
+    private $isDevMode = true;
+    /**
+     * @var string|null
+     */
+    private $proxyDir = null;
+    /**
+     * @var Cache|null
+     */
+    private $cache = null;
+    /**
+     * @var bool
+     */
+    private $useSimpleAnnotationReader = false;
+    /**
+     * @var string
+     */
+    private $connectionString = 'pgsql://mvc:eNjS98AGUIocPV92dsIp8Zok3xfqyDjj@postgres:5432/mvc';
 
     /**
      * @return bool

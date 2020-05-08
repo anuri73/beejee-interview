@@ -12,7 +12,10 @@ use Klein\Response;
 
 class AuthController extends Controller implements IController
 {
-    public AuthManager $auth;
+    /**
+     * @var AuthManager $auth
+     */
+    private $auth;
 
     public function __construct(IView $view, IModel $model, AuthManager $auth)
     {
@@ -31,7 +34,7 @@ class AuthController extends Controller implements IController
         $data = $request->param('auth');
         if ($this->auth->login(
             $data['username'],
-            $data['password'],
+            $data['password']
         )) {
             $_SESSION["authorized"] = true;
             $response->redirect('/');

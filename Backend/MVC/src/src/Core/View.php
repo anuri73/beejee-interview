@@ -5,7 +5,6 @@ namespace App\Core;
 use App\Core\Twig\AuthExtension;
 use App\Core\Twig\DumpExtension;
 use App\Core\Twig\RoutingExtension;
-use Symfony\Bridge\Twig\Extension\FormExtension;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -14,9 +13,14 @@ use Twig\Loader\FilesystemLoader;
 
 class View implements IView
 {
-    public Environment $twig;
-
-    public string $path;
+    /**
+     * @var Environment
+     */
+    private $twig;
+    /**
+     * @var string
+     */
+    private $path;
 
     public function __construct()
     {

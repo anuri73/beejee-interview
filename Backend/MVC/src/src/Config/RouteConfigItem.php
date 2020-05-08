@@ -4,9 +4,18 @@ namespace App\Config;
 
 class RouteConfigItem implements IRouteConfigItem
 {
-    public string $method;
-    public string $path;
-    public array $callback;
+    /**
+     * @var string
+     */
+    private $method;
+    /**
+     * @var string
+     */
+    private $path;
+    /**
+     * @var array
+     */
+    private $callback;
 
     public function __construct(string $method, string $path, array $callback)
     {

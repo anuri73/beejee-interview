@@ -10,7 +10,7 @@ class TaskRepository extends EntityRepository
     function findNextTasks($page = 1, $limit = 3, $sortBy = 'id')
     {
         $paginator = new Paginator($this->createQueryBuilder('task')
-            ->orderBy("task.{$sortBy}", 'ASC')
+            ->orderBy("task.{$sortBy}", 'DESC')
             ->getQuery());
         return $paginator
             ->getQuery()

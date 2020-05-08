@@ -7,7 +7,10 @@ use Tightenco\Collect\Support\Enumerable;
 
 class RouteConfig implements IRouteConfig
 {
-    private Collection $routes;
+    /**
+     * @var Collection
+     */
+    private $routes;
 
     public function __construct(?Collection $routes = null)
     {

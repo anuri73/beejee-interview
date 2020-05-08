@@ -10,10 +10,10 @@ $kernel = new Kernel();
 
 $config = new Config();
 
-$taskController = $kernel->container->get('app.task_controller');
-$authController = $kernel->container->get('app.auth_controller');
+$taskController = $kernel->getContainer()->get('app.task_controller');
+$authController = $kernel->getContainer()->get('app.auth_controller');
 
-$config->route = new RouteConfig(new Collection([
+$config->setRoute(new RouteConfig(new Collection([
     new RouteConfigItem(
         'GET',
         '/',
@@ -59,4 +59,4 @@ $config->route = new RouteConfig(new Collection([
         '/logout',
         [$authController, 'logout']
     ),
-]));
+])));

@@ -19,7 +19,7 @@ class Kernel
     /**
      * @var ContainerBuilder|ContainerInterface $container
      */
-    public ContainerInterface $container;
+    private $container;
 
     public function __construct()
     {
@@ -52,5 +52,23 @@ class Kernel
             'url' => $config->getConnectionString(),
         ]);
         return EntityManager::create($conn, $metadataConfig);
+    }
+
+    /**
+     * @return ContainerInterface|ContainerBuilder
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     * @param ContainerInterface|ContainerBuilder $container
+     * @return Kernel
+     */
+    public function setContainer($container)
+    {
+        $this->container = $container;
+        return $this;
     }
 }
